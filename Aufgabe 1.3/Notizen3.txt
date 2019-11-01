@@ -1,0 +1,77 @@
+Datei: StreamProcessing.java
+
+package app;
+
+public class StreamProcessing {
+
+    public static void main(String[] args) {
+        Stream stream = new Stream();
+
+        StreamFiller streamFiller = new StreamFiller(stream);
+        StreamPrinter streamPrinter = new StreamPrinter();
+
+        streamFiller.fillStream();
+
+        streamPrinter.setStream(stream);
+        streamPrinter.printStream();
+    }
+}
+
+Datei: StreamFiller.java
+
+package app;
+
+import app.interfaces.WriteStream;
+
+public class StreamFiller {
+    WriteStream writeStream;
+
+    public StreamFiller(WriteStream writeStream) {
+        if (writeStream == null) {
+            throw new NullPointerException("No stream object found");
+        }
+        this.writeStream = writeStream;
+    }
+
+    public void fillStream() {
+        writeStream.writeString( "\nThis is a" );
+        writeStream.writeString( " stream.\n" );
+    }
+}
+
+Datei: StreamPrinter.java
+
+package app;
+
+import app.interfaces.Applyer;
+import app.interfaces.ReadStream;
+
+public class StreamPrinter {
+    ReadStream readStream;
+
+    public void setStream(ReadStream readStream) {
+        this.readStream = readStream;
+    }
+
+    public void printStream() {
+        if (readStream == null) {
+            throw new NullPointerException("No stream object found");
+        }
+
+        readStream.apply(new Applyer() {
+            @Override
+            public void apply(char c) {
+                System.out.print(c);
+            }
+        });
+
+        char ch = readStream.readChar();
+
+        while ( ch != 0 ) {
+            System.out.print( ch );
+            ch = readStream.readChar();
+        }
+    }
+}
+
+Offensichtlich ist die Constructor Injection hier vorzuziehen, da bereits über den Konstruktor sichergestellt ist, dass StreamFiller einen Stream übergeben bekommt und so während des Programmierens Fehler aufgezeigt werden. Anders hingegen bei der Setter Injection, bei dem während der Laufzeit erst auffallen kann, dass ein Stream fehlt.

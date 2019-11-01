@@ -1,0 +1,79 @@
+Unveränderte Dateien: StreamFiller.java, StreamProcessing.java, WriteStream.java
+
+
+Datei: ReadStream.java
+
+package app.interfaces;
+
+public interface ReadStream {
+    char readChar();
+    void apply(Applyer app);
+}
+
+Datei: Applyer.java
+
+package app.interfaces;
+
+public interface Applyer {
+    void apply(char c);
+}
+
+
+Datei: Stream.java
+
+package app;
+
+import app.interfaces.Applyer;
+import app.interfaces.ReadStream;
+import app.interfaces.WriteStream;
+
+public class Stream implements ReadStream, WriteStream {
+    private String content = "";
+    int index = 0;
+
+    public char readChar() {
+        if ( index < content.length() )
+            return content.charAt( index++ );
+        else
+            return 0;
+    }
+
+    public void writeString( String str ) {
+        content += str;
+    }
+
+    public void apply(Applyer applyer) {
+        for (char c : content.toCharArray()) {
+            applyer.apply(c);
+        }
+    }
+}
+
+
+Datei: StreamPrinter.java
+
+package app;
+
+import app.interfaces.Applyer;
+import app.interfaces.ReadStream;
+
+public class StreamPrinter {
+    public static void printStream( ReadStream stream ) {
+
+        stream.apply(new Applyer() {
+            @Override
+            public void apply(char c) {
+                System.out.print(c);
+            }
+        });
+
+        char ch = stream.readChar();
+
+        while ( ch != 0 ) {
+            System.out.print( ch );
+            ch = stream.readChar();
+        }
+    }
+}
+
+

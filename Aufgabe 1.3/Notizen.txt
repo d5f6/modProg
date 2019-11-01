@@ -1,0 +1,84 @@
+Datei: ReadStream.java
+
+package app.interfaces;
+
+public interface ReadStream {
+    char readChar();
+}
+
+Datei: WriteStream.java
+
+package app.interfaces;
+
+public interface WriteStream {
+    void writeString(String s);
+}
+
+Datei: StreamPrinter.java
+
+package app;
+
+import app.interfaces.ReadStream;
+
+public class StreamPrinter {
+    public static void printStream( ReadStream stream ) {
+        char ch = stream.readChar();
+
+        while ( ch != 0 ) {
+            System.out.print( ch );
+            ch = stream.readChar();
+        }
+    }
+}
+
+Datei: StreamFiller
+
+package app;
+
+import app.interfaces.WriteStream;
+
+public class StreamFiller {
+    public static void fillStream( WriteStream stream ) {
+        stream.writeString( "\nThis is a" );
+        stream.writeString( " stream.\n" );
+    }
+}
+
+Datei: Stream.java
+
+package app;
+
+import app.interfaces.ReadStream;
+import app.interfaces.WriteStream;
+
+public class Stream implements ReadStream, WriteStream {
+    private String content = "";
+    int index = 0;
+
+    public char readChar() {
+        if ( index < content.length() )
+            return content.charAt( index++ );
+        else
+            return 0;
+    }
+
+    public void writeString( String str ) {
+        content += str;
+    }
+}
+
+Datei: StreamProcessing.java
+
+package app;
+
+public class StreamProcessing {
+
+    public static void main(String[] args) {
+        Stream stream = new Stream();
+
+        StreamFiller.fillStream(stream);
+        StreamPrinter.printStream(stream);
+    }
+}
+
+Es handelt sich um partielle Interfaces, da nicht der volle Funktionsumfange (read und write) pro Interface zur Verfügung steht.

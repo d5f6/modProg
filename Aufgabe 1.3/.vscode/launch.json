@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - StreamProcessing",
+      "request": "launch",
+      "mainClass": "app.StreamProcessing"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - App",
+      "request": "launch",
+      "mainClass": "app.App"
+    }
+  ]
+}
