@@ -27,7 +27,7 @@ public class Vector<T> {
         System.arraycopy(elements, 0, newElements, 0, elements.length);
         elements = newElements;
 
-        assert prevElement.length == elements.length + size;
+        assert prevElement.length + size == elements.length;
     }
 
     public int length() {
