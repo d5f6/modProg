@@ -1,6 +1,4 @@
-import org.junit.Assert;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class VectorTest {
@@ -19,13 +17,13 @@ public class VectorTest {
     }
 
     @Test(expected = AssertionError.class)
-    public void extendAboveLimit() {
+    public void testExtendAboveLimit() {
         Vector<String> v = new Vector<>();
         v.extend(101);
     }
 
     @Test
-    public void extendLimit() {
+    public void testExtendLimit() {
         Vector<String> v = new Vector<>();
         v.extend(100);
     }
@@ -61,6 +59,7 @@ public class VectorTest {
     public void testGetAndSetElements() {
         Vector<String> v = new Vector<>();
         final int ELEMENTS = 10;
+
         v.extend((ELEMENTS));
 
         for (int i = 0; i < ELEMENTS; i++) {
@@ -70,5 +69,10 @@ public class VectorTest {
         for (int i = 0; i < ELEMENTS; i++) {
             assertEquals("Element " + i, v.get(i));
         }
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testAssertionEnabledTest() {
+        assert false: "Kommandozeilenparameter -ea sind nicht eingeschaltet";
     }
 }
