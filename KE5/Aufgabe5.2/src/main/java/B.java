@@ -1,9 +1,21 @@
 public class B {
-  private final A delegatee = new A();
+  protected final Delegatee delegatee = new Delegatee();
 
-  public void f() {}
+  public void f() {
 
-  public int g() {
-    return delegatee.getI();
+  }
+
+  public void g() {
+
+  }
+
+  protected class Delegatee extends A {
+    public void g() {
+      B.this.g();
+    }
+
+    public void f() {
+      B.this.f();
+    }
   }
 }
