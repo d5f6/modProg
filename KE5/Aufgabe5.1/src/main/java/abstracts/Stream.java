@@ -2,6 +2,7 @@ package abstracts;
 
 import interfaces.InputStream;
 import interfaces.OutputStream;
+import streams.NullStream;
 import streams.StringStream;
 import streams.FileStream;
 
@@ -11,7 +12,7 @@ abstract public class Stream implements InputStream, OutputStream {
       return new StringStream(source);
     if (isFileValid(source))
       return new FileStream(source);
-
+    return new NullStream();
   }
 
   private static boolean isFileValid(String fileName) {
