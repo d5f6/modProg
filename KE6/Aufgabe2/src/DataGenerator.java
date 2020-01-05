@@ -9,4 +9,6 @@ public class DataGenerator {
         }
         return i * MAGIC_NUMBER;
     }
+
+
 }

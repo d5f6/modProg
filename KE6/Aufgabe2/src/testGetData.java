@@ -1,7 +1,9 @@
-import junit.framework.TestCase;
 import org.junit.Test;
 
-public class testGetData extends TestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class testGetData {
 
     @Test
     public void testGetData() {
