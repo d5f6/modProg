@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public aspect DataGeneratorAspect {
-    private Map<Integer, Integer> dataCacheMap = new HashMap<Integer, Integer>();
+    private Map<Integer, Integer> dataCacheMap = new HashMap<>();
 
     public pointcut generateDataCell(int i) :
         execution(* DataGenerator.getData(int)) && args((i));
